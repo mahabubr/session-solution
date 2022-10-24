@@ -27,9 +27,9 @@ const Header = () => {
                     <div className='mr-4 mt-2'>
                         <input type="checkbox" className="toggle" />
                     </div>
-                    <div className='mr-4'>
+                    <Link to='/login' className='mr-4'>
                         <button className="btn btn-active tracking-widest">Log in</button>
-                    </div>
+                    </Link>
                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar" data-tip="hello world" >
                         <div className="w-10 rounded-full" >
                             <img src="https://placeimg.com/80/80/people" alt='' />
