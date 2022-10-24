@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../../Assets/logo/Logo.png'
+import ReactTooltip from 'react-tooltip';
 
 const Header = () => {
     return (
         <div className='bg-slate-200'>
+            <ReactTooltip />
             <div className="navbar w-10/12 mx-auto">
                 <div className="flex-1 hidden md:flex">
                     <Link to="/">
@@ -20,14 +22,17 @@ const Header = () => {
                         <p>FAQ</p>
                     </Link>
                     <Link to='/blog' className="btn btn-ghost text-xl">
-                        <p>Blog</p>
+                        <p >Blog</p>
                     </Link>
                     <div className='mr-4 mt-2'>
                         <input type="checkbox" className="toggle" />
                     </div>
-                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                        <div className="w-10 rounded-full">
-                            <img src="https://placeimg.com/80/80/people" />
+                    <div className='mr-4'>
+                        <button className="btn btn-active tracking-widest">Log in</button>
+                    </div>
+                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar" data-tip="hello world" >
+                        <div className="w-10 rounded-full" >
+                            <img src="https://placeimg.com/80/80/people" alt='' />
                         </div>
                     </label>
                 </div>
