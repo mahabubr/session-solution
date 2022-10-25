@@ -1,10 +1,21 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaFacebook, FaGithub, FaGoogle, FaYahoo } from 'react-icons/fa';
 import Lottie from "lottie-react";
 import LottieRegisterAnimation from '../../../Assets/animation/register.json'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 const Register = () => {
+
+    const {
+        registerUser,
+        userProfileUpdate,
+        verifyUser,
+        googleLogin,
+        githubLogin
+    } = useContext(AuthContext)
 
     const [name, setName] = useState('')
     const [photoURL, setPhotoURL] = useState('')
@@ -13,6 +24,82 @@ const Register = () => {
 
     const [emailError, setEmailError] = useState('')
     const [passwordError, setPasswordError] = useState('')
+
+
+    const handleGoogleLogin = () => {
+        googleLogin()
+            .then(result => {
+                const user = result.user
+                Swal.fire(
+                    'Successfully',
+                    'Your Register Request Accepted!',
+                    'success'
+                )
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
+
+    const handleGithubLogin = () => {
+        githubLogin()
+            .then(result => {
+                const user = result.user
+                Swal.fire(
+                    'Successfully',
+                    'Your Register Request Accepted!',
+                    'success'
+                )
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
+
+
+    const handleResisterUser = (e) => {
+        e.preventDefault()
+
+        registerUser(email, password)
+            .then(result => {
+                const user = result.user
+                e.target.reset()
+                Swal.fire(
+                    'Successfully',
+                    'Your Register Request Accepted!',
+                    'success'
+                )
+                handleUserProfile(name, photoURL)
+                handleVerifyUser()
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+
+    }
+
+    const handleUserProfile = (name, photoURL) => {
+        userProfileUpdate(name, photoURL)
+            .then(() => {
+                toast.success('Your Name And Photo Updated')
+            })
+            .catch(error => {
+                toast.error(error.message)
+                console.log(error.message);
+            })
+
+    }
+
+    const handleVerifyUser = () => {
+        verifyUser()
+            .then(() => {
+                toast.success('Send Verify Email. Please Check Inbox of Spam')
+            })
+            .catch(error => {
+                toast.error(error.message)
+                console.log(error.message);
+            })
+    }
 
     const handleRegisterName = (e) => {
         const inputName = e.target.value
@@ -75,12 +162,12 @@ const Register = () => {
             </div>
             <div className='p-16'>
                 <h2 className='font-bold text-5xl text-black'>Create Account</h2>
-                <form className='mt-5'>
+                <form onSubmit={handleResisterUser} className='mt-5'>
                     <div>
-                        <input onChange={handleRegisterName} className='w-full border-b-2 border-slate-700 py-2 text-xl mt-5' type="text" name="name" id="" placeholder='Full Name' />
+                        <input required onChange={handleRegisterName} className='w-full border-b-2 border-slate-700 py-2 text-xl mt-5' type="text" name="name" id="" placeholder='Full Name' />
                     </div>
                     <div>
-                        <input onChange={handleRegisterPhotoURL} className='w-full border-b-2 border-slate-700 py-2 text-xl mt-5' type="text" name="imageURL" id="" placeholder='Image Url' />
+                        <input required onChange={handleRegisterPhotoURL} className='w-full border-b-2 border-slate-700 py-2 text-xl mt-5' type="text" name="imageURL" id="" placeholder='Image Url' />
                     </div>
                     <div>
                         <input onChange={handleRegisterEmail} className='w-full border-b-2 border-slate-700 py-2 text-xl mt-5' type="email" name="email" id="" placeholder='Email' />
@@ -100,8 +187,8 @@ const Register = () => {
                 </form>
                 <div className="divider mt-10 text-indigo-700">OR REGISTER WITH</div>
                 <div className='flex justify-around items-center mt-10'>
-                    <FaGoogle className='text-5xl border border-l-4 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
-                    <FaGithub className='text-5xl border border-l-4 border-slate-700 text-slate-700 hover:bg-slate-700 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
+                    <FaGoogle onClick={handleGoogleLogin} className='text-5xl border border-l-4 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
+                    <FaGithub onClick={handleGithubLogin} className='text-5xl border border-l-4 border-slate-700 text-slate-700 hover:bg-slate-700 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
                     <FaFacebook className='text-5xl border border-l-4 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
                     <FaYahoo className='text-5xl border border-l-4 border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
                 </div>

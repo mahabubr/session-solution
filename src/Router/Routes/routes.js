@@ -3,6 +3,7 @@ import Main from '../../Layout/Main/Main'
 import Login from "../../Pages/Components/Login/Login";
 import Register from "../../Pages/Components/Register/Register";
 import NotFound from "../../Pages/Others/NotFound/NotFound";
+import TermsAndCondition from "../../Pages/Others/TermsAndCondition/TermsAndCondition";
 
 const router = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register />
+            },
+            {
+                path: '/terms-and-condition',
+                element: <TermsAndCondition />
             }
         ]
     }

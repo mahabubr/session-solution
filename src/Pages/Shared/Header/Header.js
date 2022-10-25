@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../../../Assets/logo/Logo.png'
 import ReactTooltip from 'react-tooltip';
 import { GiHamburgerMenu } from "react-icons/gi";
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
+import toast from 'react-hot-toast';
 
 
 const Header = () => {
 
+    const { user, logOut } = useContext(AuthContext)
+
     const [navbarOpen, setNavbarOpen] = React.useState(false);
 
+    const handleSignOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire(
+                    'Successfully',
+                    'Your Log Out Request Accepted!',
+                    'success'
+                )
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
 
     return (
         <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-200 mb-3">
@@ -36,7 +54,7 @@ const Header = () => {
                 >
                     <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
 
-                        <Link to='/courses' className="btn btn-ghost text-xl">
+                        <Link to='/' className="btn btn-ghost text-xl">
                             <p>Courses</p>
                         </Link>
                         <Link to='/faq' className="btn btn-ghost text-xl">
@@ -48,14 +66,26 @@ const Header = () => {
                         <div className='mr-4 mt-2'>
                             <input type="checkbox" className="toggle" />
                         </div>
-                        <Link to='/login' className='mr-4'>
-                            <button className="btn btn-active tracking-widest">Log in</button>
-                        </Link>
-                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar" data-tip="hello world" >
-                            <div className="w-10 rounded-full" >
-                                <img src="https://placeimg.com/80/80/people" alt='' />
-                            </div>
-                        </label>
+
+                        {
+                            user
+                                ?
+                                <>
+                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom" data-tip={user?.displayName}>
+                                        <div className="w-10 rounded-full" >
+                                            <img src={user?.photoURL} alt='' />
+                                        </div>
+                                    </label>
+                                    <button onClick={handleSignOut} className="btn btn-active tracking-widest ml-4">Log Out</button>
+                                </>
+                                :
+                                <Link to='/login' className='mr-4'>
+                                    <button className="btn btn-active tracking-widest">Log in</button>
+                                </Link>
+                        }
+
+
+
                     </ul>
                 </div>
             </div>
