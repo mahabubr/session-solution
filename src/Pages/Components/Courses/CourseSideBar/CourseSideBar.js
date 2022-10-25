@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { AuthContext } from '../../../../Contexts/AuthProvider/AuthProvider';
+import CourseSideBarItems from './CourseSideBarItems/CourseSideBarItems';
 
-const CourseSideBar = () => {
+const CourseSideBar = ({ categoryData }) => {
 
     const { user } = useContext(AuthContext)
 
@@ -16,13 +17,10 @@ const CourseSideBar = () => {
                 </div>
             }
             <div className='p-10'>
-                <h2 className='text-3xl text-white'>Courses List</h2>
-                <li className='text-white'>Course 1</li>
-                <li className='text-white'>Course 1</li>
-                <li className='text-white'>Course 1</li>
-                <li className='text-white'>Course 1</li>
-                <li className='text-white'>Course 1</li>
-                <li className='text-white'>Course 1</li>
+                <h2 className='text-3xl text-white mb-6'>Graphic Design</h2>
+                {
+                    categoryData.map(data => <CourseSideBarItems key={data.id} data={data} />)
+                }
             </div>
         </div>
     );

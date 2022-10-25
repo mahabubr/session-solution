@@ -14,6 +14,7 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
+                loader: async () => fetch('https://session-solutions-server.vercel.app/category'),
                 element: <Courses />
             },
             {
