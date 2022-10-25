@@ -1,12 +1,41 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Lottie from "lottie-react";
 import LottieLoginAnimation from '../../../Assets/animation/login.json'
 import { Link } from 'react-router-dom';
 import { FaGoogle, FaGithub, FaFacebook, FaYahoo } from "react-icons/fa";
-
-
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
+import Swal from 'sweetalert2'
+import toast from 'react-hot-toast';
 
 const Login = () => {
+
+    const { LogInUser } = useContext(AuthContext)
+
+
+    const handleLoginForm = (event) => {
+        event.preventDefault()
+
+        const form = event.target
+
+        const email = form.email.value
+        const password = form.password.value
+
+        LogInUser(email, password)
+            .then(result => {
+                const user = result.user
+                console.log(user);
+                Swal.fire(
+                    'Welcome Back',
+                    'Your Login In Request Accepted!',
+                    'Enjoy'
+                )
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+
+    }
+
     return (
         <div className='grid lg:grid-cols-2 md:gap-20 md:w-10/12 mx-auto mt-10'>
             <div className='w-9/12 mx-auto'>
@@ -19,7 +48,7 @@ const Login = () => {
             </div>
             <div className='p-16'>
                 <h2 className='font-bold text-5xl text-black'>Welcome Back</h2>
-                <form className='mt-5'>
+                <form onSubmit={handleLoginForm} className='mt-5'>
                     <div>
                         <input className='w-full border-b-2 border-slate-700 py-2 text-xl mt-5' type="email" name="email" id="" placeholder='Email' />
                     </div>
