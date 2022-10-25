@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import Logo from '../../../Assets/logo/Logo.png'
 import ReactTooltip from 'react-tooltip';
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -29,7 +29,7 @@ const Header = () => {
     }
 
     return (
-        <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-200 mb-3">
+        <nav className="relative flex flex-wrap items-center justify-between px-2 py-3 bg-slate-200">
             <ReactTooltip />
             <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
                 <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
@@ -54,15 +54,30 @@ const Header = () => {
                 >
                     <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
 
-                        <Link to='/' className="btn btn-ghost text-xl">
-                            <p>Courses</p>
-                        </Link>
-                        <Link to='/faq' className="btn btn-ghost text-xl">
+                        <NavLink to='/' className={({ isActive }) => isActive
+                            ?
+                            "btn btn-primary text-xl"
+                            :
+                            "btn btn-ghost text-xl"
+                        }>
+                            <p>Lectures</p>
+                        </NavLink>
+                        <NavLink to='/faq' className={({ isActive }) => isActive
+                            ?
+                            "btn btn-primary text-xl"
+                            :
+                            "btn btn-ghost text-xl"
+                        }>
                             <p>FAQ</p>
-                        </Link>
-                        <Link to='/blog' className="btn btn-ghost text-xl">
+                        </NavLink>
+                        <NavLink to='/blog' className={({ isActive }) => isActive
+                            ?
+                            "btn btn-primary text-xl"
+                            :
+                            "btn btn-ghost text-xl"
+                        }>
                             <p >Blog</p>
-                        </Link>
+                        </NavLink>
                         <div className='mr-4 mt-2'>
                             <input type="checkbox" className="toggle" />
                         </div>
