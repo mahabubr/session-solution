@@ -1,6 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import app from '../../Config/firebase.config'
-import { createUserWithEmailAndPassword, getAuth, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, FacebookAuthProvider, getAuth, GithubAuthProvider, GoogleAuthProvider, OAuthProvider, onAuthStateChanged, sendEmailVerification, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
 
 export const AuthContext = createContext()
@@ -14,6 +14,8 @@ const AuthProvider = ({ children }) => {
 
     const googleProvider = new GoogleAuthProvider()
     const githubProvider = new GithubAuthProvider()
+    const facebookProvider = new FacebookAuthProvider()
+    const yahooProvider = new OAuthProvider('yahoo.com')
 
 
     const googleLogin = () => {
@@ -22,6 +24,14 @@ const AuthProvider = ({ children }) => {
 
     const githubLogin = () => {
         return signInWithPopup(auth, githubProvider)
+    }
+
+    const facebookLogin = () => {
+        return signInWithPopup(auth, facebookProvider)
+    }
+
+    const yahooLogin = () => {
+        return signInWithPopup(auth, yahooProvider)
     }
 
 
@@ -61,7 +71,9 @@ const AuthProvider = ({ children }) => {
 
     const authInfo = {
         googleLogin,
+        facebookLogin,
         githubLogin,
+        yahooLogin,
         LogInUser,
         registerUser,
         userProfileUpdate,

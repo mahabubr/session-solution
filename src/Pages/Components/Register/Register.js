@@ -14,7 +14,9 @@ const Register = () => {
         userProfileUpdate,
         verifyUser,
         googleLogin,
-        githubLogin
+        githubLogin,
+        facebookLogin,
+        yahooLogin
     } = useContext(AuthContext)
 
     const [name, setName] = useState('')
@@ -43,6 +45,36 @@ const Register = () => {
 
     const handleGithubLogin = () => {
         githubLogin()
+            .then(result => {
+                const user = result.user
+                Swal.fire(
+                    'Successfully',
+                    'Your Register Request Accepted!',
+                    'success'
+                )
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
+
+    const handleFacebookLogin = () => {
+        facebookLogin()
+            .then(result => {
+                const user = result.user
+                Swal.fire(
+                    'Successfully',
+                    'Your Register Request Accepted!',
+                    'success'
+                )
+            })
+            .catch(error => {
+                toast.error(error.message)
+            })
+    }
+
+    const handleYahooLogin = () => {
+        yahooLogin()
             .then(result => {
                 const user = result.user
                 Swal.fire(
@@ -189,8 +221,8 @@ const Register = () => {
                 <div className='flex justify-around items-center mt-10'>
                     <FaGoogle onClick={handleGoogleLogin} className='text-5xl border border-l-4 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
                     <FaGithub onClick={handleGithubLogin} className='text-5xl border border-l-4 border-slate-700 text-slate-700 hover:bg-slate-700 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
-                    <FaFacebook className='text-5xl border border-l-4 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
-                    <FaYahoo className='text-5xl border border-l-4 border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
+                    <FaFacebook onClick={handleFacebookLogin} className='text-5xl border border-l-4 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
+                    <FaYahoo onClick={handleYahooLogin} className='text-5xl border border-l-4 border-purple-500 text-purple-500 hover:bg-purple-500 hover:text-white duration-300 hover:rounded-md p-2 cursor-pointer' />
                 </div>
             </div>
         </div>
