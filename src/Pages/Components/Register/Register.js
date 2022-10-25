@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 const Register = () => {
     return (
         <div className='grid lg:grid-cols-2 md:gap-20 md:w-10/12 mx-auto mt-10'>
-            <div className='w-9/12 mx-auto'>
+            <div className='w-8/12 mx-auto'>
                 <Lottie animationData={LottieRegisterAnimation} loop={true} />
                 <Link to='/login' >
                     <p className='mt-12 text-center font-bold text-xl border border-b-4 border-slate-500 text-slate-600 p-1 cursor-pointer'>

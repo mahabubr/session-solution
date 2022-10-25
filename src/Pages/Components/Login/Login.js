@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { FaGoogle, FaGithub, FaFacebook, FaYahoo } from "react-icons/fa";
 
 
+
 const Login = () => {
     return (
         <div className='grid lg:grid-cols-2 md:gap-20 md:w-10/12 mx-auto mt-10'>
