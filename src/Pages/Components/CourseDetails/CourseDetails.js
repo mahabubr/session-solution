@@ -5,27 +5,35 @@ import { MdQuiz } from "react-icons/md";
 import { SiGoogleclassroom } from "react-icons/si";
 import { BiSupport } from "react-icons/bi";
 import { CiTimer } from "react-icons/ci";
+import { SiAdobeillustrator, SiAdobephotoshop, SiAdobeaftereffects, SiAdobeaudition, SiAdobepremierepro, SiAdobeindesign } from "react-icons/si";
+import { AiOutlineCloudDownload } from "react-icons/ai";
 
 const CourseDetails = () => {
 
     const courseData = useLoaderData()
 
-    const { name, image, id, video, quiz, live_class, support, duration, review, teachers } = courseData
+    const { name, image, id, video, quiz, live_class, support, duration, review, teachers, description } = courseData
 
     const { teacher_name, teacher_img, teacher_title } = teachers
 
     return (
         <div>
-            <div className='flex w-9/12 mx-auto items-start justify-center mt-24'>
-                <div className='w-6/12 p-12'>
+            <div className='mt-6 text-right w-10/12 mx-auto'>
+                <button className="btn btn-outline btn-error text-xl">
+                    <AiOutlineCloudDownload className='text-3xl mr-2' />
+                    <p>Download PDF</p>
+                </button>
+            </div>
+            <div className='lg:flex lg:w-9/12 mx-auto flex-row-reverse items-start justify-center lg:mt-12'>
+                <div className='lg:w-6/12 p-12'>
                     <h1 className='text-3xl font-bold text-pink-500 mb-6 text-justify'>Professional {name} Course.</h1>
-                    <div className='flex justify-center items-center my-5'>
+                    <div className='flex justify-start items-center my-5'>
                         <div>
-                            <img src={teacher_img} alt="" />
+                            <img className='w-14 h-14 mr-2 rounded-full ' src={teacher_img} alt="" />
                         </div>
                         <div>
-                            <h3>{teacher_name}</h3>
-                            <p>{teacher_title}</p>
+                            <h3 className='text-2xl text-black'>{teacher_name}</h3>
+                            <p>Teacher : {teacher_title}</p>
                         </div>
                     </div>
                     <div className='grid grid-cols-3 gap-6 border border-gray-800 rounded-lg p-8'>
@@ -74,14 +82,33 @@ const CourseDetails = () => {
                                 <p className='text-xl font-bold text-orange-500'>{duration}</p>
                             </div>
                         </article>
+                        <div>
+                        </div>
                     </div>
                     <button class="btn glass mt-4 text-xl">Free Seminar</button>
                     <div className='flex justify-between items-center mt-3 text-lg text-slate-800 '>
                         <p>Ratting : {review}</p>
                         <p>18000+ Students</p>
                     </div>
+                    <div className='mt-8'>
+                        <h3 className='text-3xl text-pink-600 font-bold'>Course Overview</h3>
+                        <article className='mt-2 text-xl'>
+                            {description}
+                        </article>
+                    </div>
+                    <div className='mt-8'>
+                        <h3 className='text-3xl text-pink-600 font-bold'>Which Tool Use In</h3>
+                        <article className='grid grid-cols-3 gap-7 text-8xl mt-6 text-sky-900'>
+                            <SiAdobeillustrator />
+                            <SiAdobephotoshop />
+                            <SiAdobeaftereffects />
+                            <SiAdobeaudition />
+                            <SiAdobepremierepro />
+                            <SiAdobeindesign />
+                        </article>
+                    </div>
                 </div>
-                <div className='w-6/12 sticky top-24'>
+                <div className='lg:w-6/12 sticky top-24'>
                     <img className='rounded-2xl border-4 border-blue-400' src={image} alt="" />
                     <Link to={id}>
                         <button className="btn btn-outline btn-primary mt-6 w-full text-xl">Get premium access</button>
