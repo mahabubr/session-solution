@@ -7,6 +7,7 @@ import Login from "../../Pages/Components/Login/Login";
 import Register from "../../Pages/Components/Register/Register";
 import Blog from "../../Pages/Others/Blog/Blog";
 import NotFound from "../../Pages/Others/NotFound/NotFound";
+import Profile from "../../Pages/Others/Profile/Profile";
 import TermsAndCondition from "../../Pages/Others/TermsAndCondition/TermsAndCondition";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
@@ -41,6 +42,13 @@ const router = createBrowserRouter([
                         <CheckOut />
                     </PrivateRoute>,
                 loader: async ({ params }) => fetch(`https://session-solutions-server.vercel.app/checkout/${params.id}`)
+            },
+            {
+                path: '/profile',
+                element:
+                    <PrivateRoute>
+                        <Profile />
+                    </PrivateRoute>
             },
             {
                 path: '/blog',

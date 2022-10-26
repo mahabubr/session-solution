@@ -6,7 +6,7 @@ const CourseSideBarItems = ({ data }) => {
     return (
         <div>
             <Link to={`/category/${data.id}`}>
-                <li className='bg-gray-600 text-lg border mt-5 text-white font-bold rounded-xl list-none py-2 px-4 cursor-pointer'>{data.name}</li>
+                <li className='bg-white text-lg mt-5 text-gray-800 rounded-xl list-none py-2 px-4 cursor-pointer'>{data.name}</li>
             </Link>
         </div>
     );

@@ -11,7 +11,7 @@ const CheckOut = () => {
     const { user } = useContext(AuthContext)
 
     return (
-        <div className='lg:w-5/12 w-8/12 mx-auto mt-12'>
+        <div className='lg:w-5/12 w-8/12 mx-auto mt-12 mb-24'>
             {
                 user &&
                 <div className='text-center mb-12'>

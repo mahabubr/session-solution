@@ -97,11 +97,13 @@ const Header = () => {
                             user
                                 ?
                                 <>
-                                    <label tabIndex={0} className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom" data-tip={user?.displayName}>
-                                        <div className="w-10 rounded-full" >
-                                            <img src={user?.photoURL} alt='' />
-                                        </div>
-                                    </label>
+                                    <Link to='/profile'>
+                                        <label tabIndex={0} className="btn btn-ghost btn-circle avatar tooltip tooltip-bottom" data-tip={user?.displayName}>
+                                            <div className="w-10 rounded-full" >
+                                                <img src={user?.photoURL} alt='' />
+                                            </div>
+                                        </label>
+                                    </Link>
                                     <button onClick={handleSignOut} className="btn btn-active tracking-widest ml-4">Log Out</button>
                                 </>
                                 :
