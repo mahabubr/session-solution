@@ -1,13 +1,18 @@
 import React, { useContext } from 'react';
 import Lottie from "lottie-react";
 import LottieLoginAnimation from '../../../Assets/animation/login.json'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaGoogle, FaGithub, FaFacebook, FaYahoo } from "react-icons/fa";
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2'
 import toast from 'react-hot-toast';
 
 const Login = () => {
+
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
+
+    const navigate = useNavigate()
 
     const {
         LogInUser,
@@ -26,6 +31,7 @@ const Login = () => {
                     'Your Register Request Accepted!',
                     'success'
                 )
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)
@@ -41,6 +47,7 @@ const Login = () => {
                     'Your Register Request Accepted!',
                     'success'
                 )
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)
@@ -56,6 +63,7 @@ const Login = () => {
                     'Your Register Request Accepted!',
                     'success'
                 )
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)
@@ -71,6 +79,7 @@ const Login = () => {
                     'Your Register Request Accepted!',
                     'success'
                 )
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)
@@ -94,6 +103,7 @@ const Login = () => {
                     'Your Login In Request Accepted!',
                     'success'
                 )
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)

@@ -2,12 +2,17 @@ import React, { useContext, useState } from 'react';
 import { FaFacebook, FaGithub, FaGoogle, FaYahoo } from 'react-icons/fa';
 import Lottie from "lottie-react";
 import LottieRegisterAnimation from '../../../Assets/animation/register.json'
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 import toast from 'react-hot-toast';
 
 const Register = () => {
+
+    const location = useLocation()
+    const from = location.state?.from?.pathname || '/'
+
+    const navigate = useNavigate()
 
     const {
         registerUser,
@@ -37,6 +42,7 @@ const Register = () => {
                     'Your Register Request Accepted!',
                     'success'
                 )
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)
@@ -52,6 +58,7 @@ const Register = () => {
                     'Your Register Request Accepted!',
                     'success'
                 )
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)
@@ -67,6 +74,7 @@ const Register = () => {
                     'Your Register Request Accepted!',
                     'success'
                 )
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)
@@ -82,6 +90,7 @@ const Register = () => {
                     'Your Register Request Accepted!',
                     'success'
                 )
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)
@@ -103,6 +112,7 @@ const Register = () => {
                 )
                 handleUserProfile(name, photoURL)
                 handleVerifyUser()
+                navigate(from, { replace: true })
             })
             .catch(error => {
                 toast.error(error.message)

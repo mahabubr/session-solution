@@ -7,6 +7,7 @@ import Login from "../../Pages/Components/Login/Login";
 import Register from "../../Pages/Components/Register/Register";
 import NotFound from "../../Pages/Others/NotFound/NotFound";
 import TermsAndCondition from "../../Pages/Others/TermsAndCondition/TermsAndCondition";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 const router = createBrowserRouter([
     {
@@ -34,7 +35,10 @@ const router = createBrowserRouter([
             },
             {
                 path: '/checkout/:id',
-                element: <CheckOut />,
+                element:
+                    <PrivateRoute>
+                        <CheckOut />
+                    </PrivateRoute>,
                 loader: async ({ params }) => fetch(`https://session-solutions-server.vercel.app/checkout/${params.id}`)
             },
             {

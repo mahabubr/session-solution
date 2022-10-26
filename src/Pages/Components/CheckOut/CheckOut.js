@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import { AuthContext } from '../../../Contexts/AuthProvider/AuthProvider';
 
 const CheckOut = () => {
 
@@ -7,8 +8,18 @@ const CheckOut = () => {
 
     const { name, image, description } = checkoutData
 
+    const { user } = useContext(AuthContext)
+
     return (
         <div className='lg:w-5/12 w-8/12 mx-auto mt-12'>
+            {
+                user &&
+                <div className='text-center mb-12'>
+                    <h1 className='text-2xl text-black'>{user?.displayName}</h1>
+                    <p className='text-xl'>{user?.email}</p>
+                    <p className='text-lg text-sky-500'>{user?.emailVerified ? "True" : "False"}</p>
+                </div>
+            }
             <div className='md:flex justify-center items-center'>
                 <div className='md:w-6/12 w-10/12 p-4'>
                     <h2 className='text-2xl text-black font-bold'>{name}</h2>
