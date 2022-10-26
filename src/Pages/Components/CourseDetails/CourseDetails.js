@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link, useLoaderData } from 'react-router-dom';
 import { GoDeviceCameraVideo } from "react-icons/go";
 import { MdQuiz } from "react-icons/md";
@@ -7,10 +7,20 @@ import { BiSupport } from "react-icons/bi";
 import { CiTimer } from "react-icons/ci";
 import { SiAdobeillustrator, SiAdobephotoshop, SiAdobeaftereffects, SiAdobeaudition, SiAdobepremierepro, SiAdobeindesign } from "react-icons/si";
 import { AiOutlineCloudDownload } from "react-icons/ai";
+import Pdf from "react-to-pdf";
+import ReactImageMagnify from 'react-image-magnify';
 
 const CourseDetails = () => {
 
     const courseData = useLoaderData()
+
+    const ref = useRef()
+
+    const options = {
+        orientation: 'portrait',
+        unit: 'in',
+        format: [10, 10]
+    };
 
     const { name, image, id, video, quiz, live_class, support, duration, review, teachers, description } = courseData
 
@@ -19,12 +29,14 @@ const CourseDetails = () => {
     return (
         <div>
             <div className='mt-6 text-right w-10/12 mx-auto'>
-                <button className="btn btn-outline btn-error text-xl">
-                    <AiOutlineCloudDownload className='text-3xl mr-2' />
-                    <p>Download PDF</p>
-                </button>
+                <Pdf targetRef={ref} filename="example.pdf" options={options} x={.5} y={.5} scale={0.8}>
+                    {({ toPdf }) => <button onClick={toPdf} className="btn btn-outline btn-error text-xl">
+                        <AiOutlineCloudDownload className='text-3xl mr-2' />
+                        <p>Download PDF</p>
+                    </button>}
+                </Pdf>
             </div>
-            <div className='lg:flex lg:w-9/12 mx-auto flex-row-reverse items-start justify-center lg:mt-12'>
+            <div ref={ref} className='lg:flex lg:w-9/12 mx-auto flex-row-reverse items-start justify-center lg:mt-12'>
                 <div className='lg:w-6/12 p-12'>
                     <h1 className='text-3xl font-bold text-pink-500 mb-6 text-justify'>Professional {name} Course.</h1>
                     <div className='flex justify-start items-center my-5'>
@@ -110,7 +122,8 @@ const CourseDetails = () => {
                 </div>
                 <div className='lg:w-6/12 sticky top-24'>
                     <img className='rounded-2xl border-4 border-blue-400' src={image} alt="" />
-                    <Link to={id}>
+
+                    <Link to={`/checkout/${id}`}>
                         <button className="btn btn-outline btn-primary mt-6 w-full text-xl">Get premium access</button>
                     </Link>
                 </div>

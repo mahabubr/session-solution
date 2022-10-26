@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from '../../Layout/Main/Main'
+import CheckOut from "../../Pages/Components/CheckOut/CheckOut";
 import CourseDetails from "../../Pages/Components/CourseDetails/CourseDetails";
 import Courses from "../../Pages/Components/Courses/Courses";
 import Login from "../../Pages/Components/Login/Login";
@@ -32,8 +33,13 @@ const router = createBrowserRouter([
                 loader: async ({ params }) => fetch(`https://session-solutions-server.vercel.app/category/${params.id}`)
             },
             {
+                path: '/checkout/:id',
+                element: <CheckOut />,
+                loader: async ({ params }) => fetch(`https://session-solutions-server.vercel.app/checkout/${params.id}`)
+            },
+            {
                 path: '/terms-and-condition',
-                element: <TermsAndCondition />
+                element: <TermsAndCondition />,
             }
         ]
     }
