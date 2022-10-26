@@ -19,7 +19,7 @@ const CourseCard = ({ course }) => {
                 </div>
                 <h2 className="card-title text-white text-xl mt-4">{name}</h2>
                 <p className='text-gray-200 mb-4'>{description.slice(0, 100)}...</p>
-                <Link to={`/${id}`} className='p-4'>
+                <Link to={`/category/${id}`} className='p-4'>
                     <button class="btn btn-warning w-full text-xl">Expand This Course</button>
                 </Link>
             </div>
