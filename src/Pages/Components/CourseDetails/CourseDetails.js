@@ -27,7 +27,7 @@ const CourseDetails = () => {
     const { teacher_name, teacher_img, teacher_title } = teachers
 
     return (
-        <div>
+        <div className='mb-24'>
             <div className='mt-6 text-right w-10/12 mx-auto'>
                 <Pdf targetRef={ref} filename="example.pdf" options={options} x={.5} y={.5} scale={0.8}>
                     {({ toPdf }) => <button onClick={toPdf} className="btn btn-outline btn-error text-xl">
